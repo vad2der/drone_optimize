@@ -1,28 +1,28 @@
-Drone 1, 15
-Location 1, 7.5
-Location 2, 3.2
-Location 3, 4.5
-Location 4, 12.4
-Location 5, 9.3
-Location 6, 1.7
-Location 7, 1.5
-Location 8, 3.0
-Location 9, 8.1
-Location 10, 5.7
-Location 11, 3.3
-Location 12, 10
-Location 13, 4.0
-Drone 2, 10
-Location 1, 7.5
-Location 2, 3.2
-Location 3, 4.5
-Location 4, 12.4
-Location 5, 9.3
-Location 6, 1.7
-Location 7, 1.5
-Location 8, 3.0
-Location 9, 8.1
-Location 10, 5.7
-Location 11, 3.3
-Location 12, 10
-Location 13, 4.0
+Line 1: Drone 1, 15
+Line 2: Location 1, 7.5
+Line 3: Location 2, 3.2
+Line 4: Location 3, 4.5
+Line 5: Location 4, 12.4
+Line 6: Location 5, 9.3
+Line 7: Location 6, 1.7
+Line 8: Location 7, 1.5
+Line 9: Location 8, 3.0
+Line 10: Location 9, 8.1
+Line 11: Location 10, 5.7
+Line 12: Location 11, 3.3
+Line 13: Location 12, 10
+Line 14: Location 13, 4.0
+Line 15: Drone 2, 10
+Line 16: Location 1, 7.5
+Line 17: Location 2, 3.2
+Line 18: Location 3, 4.5
+Line 19: Location 4, 12.4
+Line 20: Location 5, 9.3
+Line 21: Location 6, 1.7
+Line 22: Location 7, 1.5
+Line 23: Location 8, 3.0
+Line 24: Location 9, 8.1
+Line 25: Location 10, 5.7
+Line 26: Location 11, 3.3
+Line 27: Location 12, 10
+Line 28: Location 13, 4.0

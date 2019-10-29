@@ -34,7 +34,14 @@ RSpec.describe Optimize do
     {:locations=>[{:name=>"Location 11", :weight=>3.3, :id=>10}, {:name=>"Location 13", :weight=>4.0, :id=>12}], :rest=>2.7}]
 
 
+  data = ["Line 1: Drone 1, 15","Line 2: Location 1, 7.5","Line 3: Location 2, 3.2","Line 4: Location 3, 4.5"]
+  refine_data_result = ["Drone 1, 15", "Location 1, 7.5", "Location 2, 3.2", "Location 3, 4.5"]
+
   o = Optimize.new("./lib/test.txt")
+
+  it "Data refining" do
+    expect(o.refine_data(data)).to eq(refine_data_result)
+  end
 
   it "Trips Optimization for a Drone using all_combinations algorithm" do
     expect(o.optimize_trips(locations, 10, "all_combinations")).to eq(all_combinations_result)

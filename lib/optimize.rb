@@ -5,8 +5,12 @@ class Optimize
   attr_accessor :optimize_trips, :find_best_fit_bigger, :create_all_combinations
 
   def initialize(file_name="test.txt")
-    @input_data = File.open(file_name).readlines().map(&:chomp)
+    @input_data = refine_data(File.open(file_name).readlines().map(&:chomp))
     @raw_drone_data = []
+  end
+
+  def refine_data(data)
+    data.map{|l|l.split(": ").last}
   end
 
   def parse_data
@@ -29,18 +33,6 @@ class Optimize
     @raw_drone_data << {:name => current_drone[:name],
             :max_weight => current_drone[:max_weight],
             :locations => locations.sort_by {|k| k[:weight] }.reverse}
-    #puts @raw_drone_data
-  end
-
-  def output_parsed_data
-    puts "*"*10
-    @raw_drone_data.each_with_index {|d, i|
-      puts d[:name]
-      puts "Trip #" + (i+1).to_s
-      d[:locations].each_with_index {|l, ind|
-        puts l[:name] + "(" + l[:weight].to_s + ")"
-      }
-    }
   end
 
   def verify_packages
@@ -63,13 +55,13 @@ class Optimize
     return checked_drones
   end
 
-  def optimize_drones(data=nil)
+  def optimize_drones(data=nil, alg="first_bigger")
     @raw_drone_data = data if !data.nil?     
     parsed_data = parse_data()
     verified_drone_data = verify_packages()
     puts verified_drone_data.to_s
     verified_drone_data.each {|drone|
-      trips = optimize_trips(drone[:locations], drone[:max_weight], "all_combinations")
+      trips = optimize_trips(drone[:locations], drone[:max_weight], alg)
       puts drone[:name]
       trips.each_with_index {|trip, i|
         puts "Trip %s" % [i + 1]
@@ -84,6 +76,7 @@ class Optimize
       # OPTION #1 - first bigger algorithm
       trips = []
       selected_location_ids = []
+      # following steps require having ids
       if locations.map{|l|l[:id]}.compact.size == 0
         locations_with_ids = []
         locations.each_with_index {|l, i|

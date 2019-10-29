@@ -1,35 +1,59 @@
-# Optimize
+# Test description
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/optimize`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Drone Delivery Service
+A squad of drones have been tasked with delivering packages for a major online reseller in a world where time and distance do not matter.  Each drone can carry a specific weight, and can make multiple deliveries before returning to home base to pick up additional loads; however the goal is to make the fewest number of trips as each time the drone returns to home base it is extremely costly to refuel and reload the drone.
+The purpose of the written software will be to accept input which will include the name of a single drone and the maximum weight it can carry, along with a series of locations and the total weight needed to be delivered to that specific location.  The software should highlight the most efficient deliveries for the drone to make on each trip.
+Assume that time and distance to each drop off location do not matter, and that size of each package is also irrelevant.  It is also known that the maximum number of deliveries is a reasonable number.
 
-TODO: Delete this and the text above, and describe your gem
+## Given Input
+`Line 1: [Drone #1 Name], [#1 Maximum Weight]
+Line 2: [Location #1 Name], [Location #1 Package Weight]
+Line 3: [Location #2 Name], [Location #2 Package Weight]
+Line 4: [Location #3 Name], [Location #3 Package Weight]`
+Etc.
 
-## Installation
+## Expected Output
+`[Drone #1 Name]
+Trip #1
+[Location #2 Name], [Location #3 Name]
+Trip #2
+[Location #1 Name]`
 
-Add this line to your application's Gemfile:
 
-```ruby
-gem 'optimize'
-```
+# Solution
 
-And then execute:
+## How to run
 
-    $ bundle
+1. Import solution
+`require "./optimize"
 
-Or install it yourself as:
+2. Initialize class into an instance
 
-    $ gem install optimize
+    `o = Optimize.new`
 
-## Usage
+optionally, add a ref path to a data file as long as it is formatted properly
 
-TODO: Write usage instructions here
+    `o = Optimize.new("./lib/test.txt")`
 
-## Development
+3. Run the Drone Trips optimization
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+    `o.optimize_drones() # first_bigger is picked by default` 
+    `o.optimize_drones("first_bigger")`
+    `o.optimize_drones("all_combinations")`
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    2 options for optimization alorithms are provided:
 
-## Contributing
+    - *first_bigger*: Location sorted by weight [O(n2) as a worst case], then, starting with the bigger one, it tries to fit next possible biggest Location into a Trip [O(n)]. This one is a default. It is a quick algorithm, thought might be not the best for a big number and variety of packages.
+    - *all_combinations*: All possible location combinations are created [O(n log n)]. Then we filter out those which have sum weight bigger then Drone can load and empty ones. Sort them by the most load [O(n2) as a worst case]. And iterate through them and while checking if they have not been already selected, add them to selected. Runs longer because of number of combinations for a sum of sizes from current_size = (0..number_of_locations) [locations.size! / ((location.size - current_size)! * current_size!)]. But can provide better Trip combinations, than the previous algorithm.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/optimize.
+## Testing
+
+run `bundle install` if rspec gem is not installed yet
+run `rspec` from project root
+
+## Prepared by
+
+Vadim Deryabin
+
+_vadim.deryabin@protonmail.com_
+_+1 (587) 718-0725_
