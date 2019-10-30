@@ -48,8 +48,9 @@ optionally, add a ref path to a data file as long as it is formatted properly
 
 ## Testing
 
-run `bundle install` if rspec gem is not installed yet
-run `rspec` from project root
+Run `bundle install` if rspec gem is not installed yet
+
+Run `rspec` from project root
 
 ## Prepared by
 
